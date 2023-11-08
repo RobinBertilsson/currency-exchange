@@ -11,10 +11,9 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model CurrencyRate {
+model CurrencyRateHistories {
+  id       String   @id @default(cuid())
   currency String
-  rate     Int
+  rate     Float
   date     DateTime @db.Date
-
-  @@unique([currency, rate, date])
 }
