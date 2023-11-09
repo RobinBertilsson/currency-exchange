@@ -23,7 +23,7 @@ export function CurrencyInput(props: Props) {
           className="border-0 bg-transparent focus:outline-none focus:ring-0 w-full"
           onChange={onAmountChange}
           value={amountValue}
-          type="text"
+          type="number"
         />
       )}
 

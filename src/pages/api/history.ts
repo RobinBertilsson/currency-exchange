@@ -16,10 +16,17 @@ const schema = z.object({
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Response | ErrorResponse>) {
   try {
+    /**
+     * Validating API input.
+     * If the given input doesn't pass the validation, a ZodError will be thrown.
+     */
     const { currency } = schema.parse({
       currency: req.query.currency,
     })
 
+    /**
+     * Find all histories for the given currency.
+     */
     const histories = await prisma.currencyRateHistories.findMany({
       where: {
         currency,
@@ -39,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     if (e instanceof ZodError) {
       return res.status(422).json({
         /**
-         * @todo should not rely on external contract, better transforming it.
+         * @todo instead of relying on a third party contract, define your own so it doens't break your API contract upon change.
          */
         issues: e.issues,
       })

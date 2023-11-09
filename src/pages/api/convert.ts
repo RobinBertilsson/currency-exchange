@@ -20,6 +20,10 @@ const schema = z.object({
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Response | ErrorResponse>) {
   try {
+    /**
+     * Validating API input.
+     * If the given input doesn't pass the validation, a ZodError will be thrown.
+     */
     const { amount, base, currency } = schema.parse({
       amount: Number(req.query.amount),
       currency: req.query.currency,
@@ -28,6 +32,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     const today = new Date()
 
+    /**
+     * Fetching today's histories.
+     */
     let record = await prisma.currencyRateHistories.findFirst({
       where: {
         date: today,
@@ -35,6 +42,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
       },
     })
 
+    /**
+     * If there is no currency rate for today, fetch it from API (openexchangerates.org) and store it in DB (like a cache layer).
+     */
     if (!record) {
       const response = await SDK.Historical.getHistorical({
         appId: process.env.APP_INTEGRATION_OPENEXCHANGERATES_APP_ID as string,
@@ -61,10 +71,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     })
   } catch (e) {
     if (e instanceof ZodError) {
+      /**
+       * @todo instead of relying on a third party contract, define your own so it doens't break your API contract upon change.
+       */
       return res.status(422).json({
-        /**
-         * @todo should not rely on external contract, better transforming it.
-         */
         issues: e.issues,
       })
     }

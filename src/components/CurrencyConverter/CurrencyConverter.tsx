@@ -1,32 +1,19 @@
+import { CurrencyHistory } from '~/components/CurrencyHistory/CurrencyHistory'
+import { useConvert, Values as UseConvertValues } from '~/hooks/useConvert'
 import { CurrencyInput } from '~/components/CurrencyInput/CurrencyInput'
 import { Heading } from '~/components/Heading/Heading'
-import { useMemo, useState } from 'react'
-import { useQuery } from 'react-query'
-import { CurrencyHistory } from '../CurrencyHistory/CurrencyHistory'
-
-interface FormDataObj {
-  currency: string
-  amount: number
-  base: string
-}
+import { useMemo } from 'react'
 
 interface Props {
   disableChangeBaseCurrency?: boolean
-  initialValues: FormDataObj
+  initialValues: UseConvertValues
   baseCurrency: string
   currencies: string[]
 }
 
 export function CurrencyConverter(props: Props) {
   const { currencies, initialValues, baseCurrency, disableChangeBaseCurrency = true } = props
-
-  const [amount, setAmount] = useState<string>(initialValues.amount.toString())
-  const [currency, setCurrency] = useState<string>(initialValues.currency)
-  const [base, setBase] = useState<string>(initialValues.base)
-
-  const { isLoading, data } = useQuery<{ result: number }>(['convert', amount, base, currency], () =>
-    fetch(`/api/convert?base=${base}&currency=${currency}&amount=${amount}`).then(res => res.json())
-  )
+  const { amount, base, currency, data, isLoading, setAmount, setBase, setCurrency } = useConvert(initialValues)
 
   const baseCurrencies = useMemo(() => {
     if (!disableChangeBaseCurrency) {
@@ -52,7 +39,7 @@ export function CurrencyConverter(props: Props) {
         />
 
         <CurrencyInput
-          amountValue={isLoading ? '' : data?.result.toString() ?? ''}
+          amountValue={isLoading ? '' : data?.result?.toString() ?? ''}
           onCurrencyChange={e => setCurrency(e.target.value)}
           onAmountChange={() => {}}
           currencyValue={currency}

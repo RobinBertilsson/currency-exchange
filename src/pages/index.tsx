@@ -10,8 +10,8 @@ export default function Index() {
       <Container>
         <CurrencyConverter
           disableChangeBaseCurrency={process.env.NEXT_PUBLIC_APP_ENABLE_CHANGE_BASE_CURRENCY === 'false'}
-          initialValues={{ amount: 1, base: 'USD', currency: 'SEK' }}
           baseCurrency={process.env.NEXT_PUBLIC_APP_BASE_CURRENCY as string}
+          initialValues={{ amount: 1, base: 'USD', currency: 'SEK' }}
           currencies={currencies}
         />
       </Container>
