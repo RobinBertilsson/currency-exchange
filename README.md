@@ -13,6 +13,10 @@ This application covers two primary things
 # Clone the project
 git clone https://github.com/RobinBertilsson/currency-exchange.git
 
+# Create .env file
+# After created, ensure to set `APP_INTEGRATION_OPENEXCHANGERATES_APP_ID`.
+cp .env.example .env
+
 # Navigate to project
 cd ./currency-exchange
 
