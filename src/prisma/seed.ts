@@ -1,7 +1,7 @@
 import { createDateInterval, createUtcDate, format } from '../utils/date'
-import { Currency } from '../sdk/shared/Currency'
 import { SDK } from '../sdk/openexchangerates'
 import { prisma } from './client'
+import { getCurrencies } from '~/utils/currency'
 
 async function main() {
   const start = createUtcDate(2023, 10, 1)
@@ -15,8 +15,8 @@ async function main() {
 
     const response = await SDK.Historical.getHistorical({
       appId: process.env.APP_INTEGRATION_OPENEXCHANGERATES_APP_ID as string,
-      symbols: process.env.APP_CURRENCIES?.split(',') as Currency[],
-      base: process.env.APP_BASE_CURRENCY as Currency,
+      base: process.env.NEXT_PUBLIC_APP_BASE_CURRENCY as string,
+      symbols: getCurrencies(),
       date: date,
     })
 

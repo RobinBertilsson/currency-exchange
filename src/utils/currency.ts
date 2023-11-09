@@ -1,5 +1,6 @@
-import { Currency } from '~/sdk/shared/Currency'
-
-export function getCurrencies(): Currency[] {
-  return (process.env.APP_CURRENCIES?.split(',') ?? []) as Currency[]
+/**
+ * Get all the configured currencies.
+ */
+export function getCurrencies(): string[] {
+  return (process.env.NEXT_PUBLIC_APP_CURRENCIES?.split(',') ?? []) as string[]
 }
