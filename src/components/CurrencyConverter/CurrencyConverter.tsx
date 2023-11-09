@@ -2,6 +2,7 @@ import { CurrencyInput } from '~/components/CurrencyInput/CurrencyInput'
 import { Heading } from '~/components/Heading/Heading'
 import { useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
+import { CurrencyHistory } from '../CurrencyHistory/CurrencyHistory'
 
 interface FormDataObj {
   currency: string
@@ -36,27 +37,35 @@ export function CurrencyConverter(props: Props) {
   }, [baseCurrency, disableChangeBaseCurrency, currencies])
 
   return (
-    <div className="space-y-2">
+    <>
       <Heading level="h1" withBorder>
         Convert {base} to {currency}
       </Heading>
 
-      <CurrencyInput
-        onAmountChange={e => setAmount(e.target.value)}
-        onCurrencyChange={e => setBase(e.target.value)}
-        currencyValue={baseCurrency}
-        currencies={baseCurrencies}
-        amountValue={amount}
-      />
+      <div className="mb-8 space-y-2">
+        <CurrencyInput
+          onAmountChange={e => setAmount(e.target.value)}
+          onCurrencyChange={e => setBase(e.target.value)}
+          currencyValue={baseCurrency}
+          currencies={baseCurrencies}
+          amountValue={amount}
+        />
 
-      <CurrencyInput
-        amountValue={isLoading ? '' : data?.result.toString() ?? ''}
-        onCurrencyChange={e => setCurrency(e.target.value)}
-        onAmountChange={() => {}}
-        currencyValue={currency}
-        currencies={currencies}
-        isLoading={isLoading}
-      />
-    </div>
+        <CurrencyInput
+          amountValue={isLoading ? '' : data?.result.toString() ?? ''}
+          onCurrencyChange={e => setCurrency(e.target.value)}
+          onAmountChange={() => {}}
+          currencyValue={currency}
+          currencies={currencies}
+          isLoading={isLoading}
+        />
+      </div>
+
+      <Heading level="h2" withBorder>
+        History
+      </Heading>
+
+      <CurrencyHistory currency={currency} />
+    </>
   )
 }
