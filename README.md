@@ -32,4 +32,7 @@ nvm prisma db push
 # Optional, but recommended
 # Seed currency histories
 npm run db:seed
+
+# Run application
+npm run dev
 ```
