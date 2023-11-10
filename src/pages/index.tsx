@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async context => {
   if (!base || !currency || !amount) {
     return {
       redirect: {
-        destination: `/?amount=1&currency=USD&base=SEK`,
+        destination: `/?amount=1&base=USD&currency=SEK`,
         statusCode: 307,
       },
     }

@@ -20,7 +20,7 @@ export function useConvert(values: Values) {
   const { push: redirect } = useRouter()
 
   useEffect(() => {
-    redirect(`/?amount=${amount}&currency=${currency}&base=${base}`)
+    redirect(`/?amount=${amount}&base=${base}&currency=${currency}`)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [amount, base, currency])
 
