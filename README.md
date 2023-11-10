@@ -29,7 +29,6 @@ docker-compose up -d
 # Migrate database
 nvm prisma db push
 
-# Optional, but recommended
 # Seed currency histories
 npm run db:seed
 
