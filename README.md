@@ -24,7 +24,7 @@ In order to populate the database with exchange rates I've created a seed method
 
 Since openexchangerates.org has quite a limited free plan there's quite a few workarounds, for example you're not able to change the base currency, so when inserting currency histories into the database I'm practically reversing each currency, for example `1 USD to SEK ~= 10,92`, which also means `1 SEK to USD ~= (1 / 10,92)`.
 
-You're also not able to use the `time-series` endpoint which would be very neat for historical data (in order to save down on API hits). 
+You're also not able to use the `time-series` endpoint which would be very neat for historical data (in order to save down on API hits).
 
 ## Getting started
 ```bash

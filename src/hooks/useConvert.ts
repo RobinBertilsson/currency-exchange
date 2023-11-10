@@ -1,5 +1,6 @@
-import { useState } from 'react'
 import { useQuery } from 'react-query'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 export interface Values {
   currency: string
@@ -15,6 +16,13 @@ export function useConvert(values: Values) {
   const { isLoading, data } = useQuery<{ result: number }>(['convert', amount, base, currency], () =>
     fetch(`/api/convert?base=${base}&currency=${currency}&amount=${amount}`).then(res => res.json())
   )
+
+  const { push: redirect } = useRouter()
+
+  useEffect(() => {
+    redirect(`/?amount=${amount}&currency=${currency}&base=${base}`)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [amount, base, currency])
 
   return {
     amount,
