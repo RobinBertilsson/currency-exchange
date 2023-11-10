@@ -31,6 +31,9 @@ You're also not able to use the `time-series` endpoint which would be very neat 
 # Clone the project
 git clone https://github.com/RobinBertilsson/currency-exchange.git
 
+# Navigate to directory
+cd ./currency-exchange
+
 # Create .env file
 # After created, ensure to set `APP_INTEGRATION_OPENEXCHANGERATES_APP_ID`.
 cp .env.example .env
