@@ -12,8 +12,9 @@ datasource db {
 }
 
 model CurrencyRateHistories {
-  id       String   @id @default(cuid())
-  currency String
-  rate     Float
-  date     DateTime @db.Date
+  id           String   @id @default(cuid())
+  baseCurrency String
+  currency     String
+  rate         Float
+  date         DateTime @db.Date
 }

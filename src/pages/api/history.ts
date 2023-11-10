@@ -29,11 +29,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
      */
     const histories = await prisma.currencyRateHistories.findMany({
       where: {
-        currency,
+        currency: currency,
       },
       orderBy: {
         date: 'asc',
       },
+      take: 7,
     })
 
     return res.status(200).json({

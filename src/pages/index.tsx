@@ -9,9 +9,8 @@ export default function Index() {
     <main className="py-8">
       <Container>
         <CurrencyConverter
-          disableChangeBaseCurrency={process.env.NEXT_PUBLIC_APP_ENABLE_CHANGE_BASE_CURRENCY === 'false'}
           baseCurrency={process.env.NEXT_PUBLIC_APP_BASE_CURRENCY as string}
-          initialValues={{ amount: 1, base: 'USD', currency: 'SEK' }}
+          initialValues={{ amount: 1, base: 'SEK', currency: 'USD' }}
           currencies={currencies}
         />
       </Container>

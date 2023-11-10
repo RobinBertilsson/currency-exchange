@@ -2,26 +2,16 @@ import { CurrencyHistoryGraph } from '~/components/CurrencyHistoryGraph/Currency
 import { useConvert, Values as UseConvertValues } from '~/hooks/useConvert'
 import { CurrencyInput } from '~/components/CurrencyInput/CurrencyInput'
 import { Heading } from '~/components/Heading/Heading'
-import { useMemo } from 'react'
 
 interface Props {
-  disableChangeBaseCurrency?: boolean
   initialValues: UseConvertValues
   baseCurrency: string
   currencies: string[]
 }
 
 export function CurrencyConverter(props: Props) {
-  const { currencies, initialValues, baseCurrency, disableChangeBaseCurrency = true } = props
+  const { currencies, initialValues } = props
   const { amount, base, currency, data, isLoading, setAmount, setBase, setCurrency } = useConvert(initialValues)
-
-  const baseCurrencies = useMemo(() => {
-    if (!disableChangeBaseCurrency) {
-      return currencies
-    }
-
-    return currencies.filter(c => c === baseCurrency)
-  }, [baseCurrency, disableChangeBaseCurrency, currencies])
 
   return (
     <>
@@ -33,8 +23,8 @@ export function CurrencyConverter(props: Props) {
         <CurrencyInput
           onAmountChange={e => setAmount(e.target.value)}
           onCurrencyChange={e => setBase(e.target.value)}
-          currencyValue={baseCurrency}
-          currencies={baseCurrencies}
+          currencies={currencies}
+          currencyValue={base}
           amountValue={amount}
         />
 
@@ -52,7 +42,7 @@ export function CurrencyConverter(props: Props) {
         History
       </Heading>
 
-      <CurrencyHistoryGraph currency={currency} />
+      <CurrencyHistoryGraph currency={base} />
     </>
   )
 }

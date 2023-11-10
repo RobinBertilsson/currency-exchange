@@ -17,21 +17,6 @@ export function addDays(date: Date, days: number): Date {
 }
 
 /**
- * Returns a range between two given dates.
- */
-export function createDateInterval(start: Date, end: Date): Date[] {
-  const dates: Date[] = []
-  let current = start
-
-  while (current <= end) {
-    dates.push(current)
-    current = addDays(current, 1)
-  }
-
-  return dates
-}
-
-/**
  * Formats the given date to the given format.
  */
 export function format(date: Date, format: DateFormat = 'yyyy-MM-dd'): string {

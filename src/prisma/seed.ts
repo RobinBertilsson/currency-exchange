@@ -4,16 +4,17 @@ import { SDK } from '../sdk/openexchangerates'
 import { prisma } from './client'
 
 async function main() {
-  // const start = createUtcDate(2023, 10, 1)
-  // const end = createUtcDate(2023, 10, 31)
+  const baseCurrency = process.env.NEXT_PUBLIC_APP_BASE_CURRENCY as string
 
-  // const days = createDateInterval(start, end)
-
+  /**
+   * @todo use regular date?
+   */
   const days = [
     createUtcDate(2015, 3, 26),
     createUtcDate(2017, 6, 13),
     createUtcDate(2019, 6, 13),
     createUtcDate(2021, 6, 13),
+    new Date(),
   ]
 
   for (const day of days) {
@@ -22,8 +23,8 @@ async function main() {
 
     const response = await SDK.Historical.getHistorical({
       appId: process.env.APP_INTEGRATION_OPENEXCHANGERATES_APP_ID as string,
-      base: process.env.NEXT_PUBLIC_APP_BASE_CURRENCY as string,
       symbols: getCurrencies(),
+      base: baseCurrency,
       date: date,
     })
 
@@ -33,8 +34,18 @@ async function main() {
       await prisma.currencyRateHistories.create({
         data: {
           date: iso,
+          baseCurrency,
           currency,
           rate,
+        },
+      })
+
+      await prisma.currencyRateHistories.create({
+        data: {
+          baseCurrency: currency,
+          currency: baseCurrency,
+          rate: 1 / rate,
+          date: iso,
         },
       })
     }
