@@ -16,7 +16,7 @@ Instead of persisting the data in localstorage (which would be an option, even t
 
 The way the service works is via two primary API endpoints. `convert` and `history` (they're both public, meaning not protected by any authentication or such, not even proper CORS configuration, which would be prefered in a production environment).
 
-The `convert` endpoint is basically accepting a currency to convert from, the amount and a currency to convert to, then returns the amount. It's fetching the exchange rate histories from the database, based on the parameters specified above.
+The `convert` endpoint is basically accepting a currency to convert from, the amount and a currency to convert into, then returns the amount. It's fetching the exchange rate histories from the database, based on the parameters specified above.
 
 The `history` endpoint returns historic exchange rate for a given currency, in this example it's used to visualize it inside a line chart.
 
