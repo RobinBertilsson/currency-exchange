@@ -19,7 +19,7 @@ export function CurrencyConverter(props: Props) {
         Convert {base} to {currency}
       </Heading>
 
-      <div className="mb-8 space-y-2">
+      <div className="mb-8 grid grid-cols-1 md:grid-cols-2 gap-2">
         <CurrencyInput
           onAmountChange={e => setAmount(e.target.value)}
           onCurrencyChange={e => setBase(e.target.value)}

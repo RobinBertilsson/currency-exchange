@@ -1,6 +1,8 @@
+import classNames from 'classnames'
 import { ChangeEvent } from 'react'
+import { HasClassName } from '~/models/HasClassName'
 
-interface Props {
+interface Props extends HasClassName {
   onCurrencyChange?: (event: ChangeEvent<HTMLSelectElement>) => void
   onAmountChange?: (event: ChangeEvent<HTMLInputElement>) => void
   currencyValue: string
@@ -10,10 +12,23 @@ interface Props {
 }
 
 export function CurrencyInput(props: Props) {
-  const { onAmountChange, amountValue, onCurrencyChange, currencyValue, currencies, isLoading = false } = props
+  const {
+    onAmountChange,
+    amountValue,
+    onCurrencyChange,
+    currencyValue,
+    currencies,
+    className,
+    isLoading = false,
+  } = props
 
   return (
-    <div className="flex focus-within:ring-2 ring-black rounded bg-white border border-gray-300">
+    <div
+      className={classNames(
+        'flex focus-within:ring-2 ring-black rounded bg-white border border-gray-300 w-full',
+        className
+      )}
+    >
       {isLoading ? (
         <div className="w-full flex items-center justify-start px-3">
           <div className="w-44 h-4 bg-gray-200 animate-pulse" />
