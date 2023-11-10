@@ -38,9 +38,6 @@ cd ./currency-exchange
 # After created, ensure to set `APP_INTEGRATION_OPENEXCHANGERATES_APP_ID`.
 cp .env.example .env
 
-# Navigate to project
-cd ./currency-exchange
-
 # Install dependencies
 npm install
 
