@@ -37,7 +37,9 @@ export function createDateInterval(start: Date, end: Date): Date[] {
 export function format(date: Date, format: DateFormat = 'yyyy-MM-dd'): string {
   switch (format) {
     case 'yyyy-MM-dd':
-      return `${date.getFullYear()}-${date.getUTCMonth() + 1}-${('0' + date.getUTCDate()).slice(-2)}`
+      return `${date.getFullYear()}-${('0' + (date.getUTCMonth() + 1)).slice(-2)}-${('0' + date.getUTCDate()).slice(
+        -2
+      )}`
     default:
       throw new Error(`The format "${format}" is not yet supported.`)
   }

@@ -1,13 +1,20 @@
-import { createDateInterval, createUtcDate, format } from '../utils/date'
+import { createUtcDate, format } from '../utils/date'
+import { getCurrencies } from '../utils/currency'
 import { SDK } from '../sdk/openexchangerates'
 import { prisma } from './client'
-import { getCurrencies } from '~/utils/currency'
 
 async function main() {
-  const start = createUtcDate(2023, 10, 1)
-  const end = createUtcDate(2023, 10, 31)
+  // const start = createUtcDate(2023, 10, 1)
+  // const end = createUtcDate(2023, 10, 31)
 
-  const days = createDateInterval(start, end)
+  // const days = createDateInterval(start, end)
+
+  const days = [
+    createUtcDate(2015, 3, 26),
+    createUtcDate(2017, 6, 13),
+    createUtcDate(2019, 6, 13),
+    createUtcDate(2021, 6, 13),
+  ]
 
   for (const day of days) {
     const date = format(day)

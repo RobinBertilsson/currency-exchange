@@ -1,4 +1,4 @@
-import { CurrencyHistory } from '~/components/CurrencyHistory/CurrencyHistory'
+import { CurrencyHistoryGraph } from '~/components/CurrencyHistoryGraph/CurrencyHistoryGraph'
 import { useConvert, Values as UseConvertValues } from '~/hooks/useConvert'
 import { CurrencyInput } from '~/components/CurrencyInput/CurrencyInput'
 import { Heading } from '~/components/Heading/Heading'
@@ -52,7 +52,7 @@ export function CurrencyConverter(props: Props) {
         History
       </Heading>
 
-      <CurrencyHistory currency={currency} />
+      <CurrencyHistoryGraph currency={currency} />
     </>
   )
 }
